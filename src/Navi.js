@@ -27,6 +27,7 @@ import {
 } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faReddit } from "@fortawesome/free-brands-svg-icons";
+import { useEffect } from "react";
 
 function Navi({
   userName,
@@ -46,7 +47,7 @@ function Navi({
   loginPassword,
   setLoginPassword,
   bearer,
-  setBearer
+  setBearer,
 }) {
   const toggle2 = () => setModal(!modal);
   const toggle3 = () => setModal2(!modal2);
@@ -78,23 +79,45 @@ function Navi({
       "Access-Control-Allow-Origin": "*",
     };
 
-    const data = { "grant_type": "password",
-    "client_id": 2,
-    "client_secret": "VSGWIBb4BXuI7xX4wZIm8TvkWsAdhZB1VLpPcvmr",
-    password: loginPassword,
-    username:loginEmail ,
-    "scope": ""};
+    const data = {
+      grant_type: "password",
+      client_id: 2,
+      client_secret: "VSGWIBb4BXuI7xX4wZIm8TvkWsAdhZB1VLpPcvmr",
+      password: loginPassword,
+      username: loginEmail,
+      scope: "",
+    };
     axios({
       url,
       method,
       headers,
       data,
     })
-      .then(res => setBearer(prevBearer => prevBearer = res.data.access_token),console.log('logged in'))
+      .then(
+        (res) =>
+          setBearer((prevBearer) => (prevBearer = res.data.access_token)),
+        console.log("logged in")
+      )
       .catch((err) => console.log("error: ", err));
-      console.log(bearer)
-      
+    console.log(bearer);
   };
+  useEffect(() => {
+    {
+      bearer &&
+        axios({
+          url: "http://localhost:8000/api/user",
+          method: "get",
+          headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${bearer}`,
+          },
+        })
+          .then((response) => console.log(response))
+          .catch((err) => console.log("error: ", err));
+    }
+  }, [bearer]);
+
+  // .catch(err => console.log('error: ', err))
   return (
     <div>
       <link
