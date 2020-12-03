@@ -28,6 +28,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faReddit } from "@fortawesome/free-brands-svg-icons";
 import { useEffect } from "react";
+import './Navi.css'
 
 function Navi({
   userName,
@@ -48,10 +49,13 @@ function Navi({
   setLoginPassword,
   bearer,
   setBearer,
+  login,
+  setLogin
 }) {
   const toggle2 = () => setModal(!modal);
   const toggle3 = () => setModal2(!modal2);
   const toggle = () => setIsOpen(!isOpen);
+
   const clickHandler = () => {
     const url = "http://localhost:8000/register";
     const method = "post";
@@ -112,10 +116,12 @@ function Navi({
             Authorization: `Bearer ${bearer}`,
           },
         })
-          .then((response) => console.log(response))
+          .then(() => setLogin(true),console.log(login))
           .catch((err) => console.log("error: ", err));
     }
+  console.log(bearer)
   }, [bearer]);
+  
 
   // .catch(err => console.log('error: ', err))
   return (
@@ -141,8 +147,9 @@ function Navi({
                 GitHub
               </NavLink>
             </NavItem> */}
-              <div className="float-right">
-                <Button outline color="primary" onClick={toggle2}>
+
+              <div className="login">
+                <Button outline color="primary" onClick={toggle2} className="loginBtn">
                   Login
                 </Button>
                 <Modal isOpen={modal} toggle={toggle2}>
