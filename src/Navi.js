@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import AppContext from "./AppContext";
 import {
   Collapse,
   Navbar,
@@ -27,8 +28,8 @@ import {
 } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faReddit } from "@fortawesome/free-brands-svg-icons";
-import { useEffect } from "react";
-import './Navi.css'
+import { useContext, useEffect } from "react";
+import "./Navi.css";
 
 function Navi({
   userName,
@@ -50,8 +51,9 @@ function Navi({
   bearer,
   setBearer,
   login,
-  setLogin
+  setLogin,
 }) {
+  const context = useContext(AppContext);
   const toggle2 = () => setModal(!modal);
   const toggle3 = () => setModal2(!modal2);
   const toggle = () => setIsOpen(!isOpen);
@@ -86,7 +88,7 @@ function Navi({
     const data = {
       grant_type: "password",
       client_id: 2,
-      client_secret: "VSGWIBb4BXuI7xX4wZIm8TvkWsAdhZB1VLpPcvmr",
+      client_secret: "WRwtnxeHIEeaRksqpLpubm7ATdCbu30XyXa2udCc",
       password: loginPassword,
       username: loginEmail,
       scope: "",
@@ -116,12 +118,11 @@ function Navi({
             Authorization: `Bearer ${bearer}`,
           },
         })
-          .then(() => setLogin(true),console.log(login))
+          .then(() => setLogin(true), console.log(login))
           .catch((err) => console.log("error: ", err));
     }
-  console.log(bearer)
+    console.log(bearer);
   }, [bearer]);
-  
 
   // .catch(err => console.log('error: ', err))
   return (
@@ -135,120 +136,29 @@ function Navi({
           <FontAwesomeIcon icon={faReddit} color="red" size="2x" spin />
           reddit
         </NavbarBrand>
-        <Container className="d-flex">
+        <Container className="d-flex justify-content-end">
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
-            <Nav className="mr-auto" navbar>
-              <NavItem>
+            <Nav pills>
+              {/* <NavItem>
                 <NavLink href="/components/">Components</NavLink>
-              </NavItem>
+              </NavItem> */}
               {/* <NavItem>
               <NavLink href="https://github.com/reactstrap/reactstrap">
                 GitHub
               </NavLink>
             </NavItem> */}
 
-              <div className="login">
-                <Button outline color="primary" onClick={toggle2} className="loginBtn">
+              <NavItem onClick={toggle2} className="login">
+                <Button outline color="primary">
                   Login
                 </Button>
-                <Modal isOpen={modal} toggle={toggle2}>
-                  <ModalHeader toggle={toggle2}>Login</ModalHeader>
-                  <ModalBody>
-                    <Form>
-                      <Row form>
-                        <Col md={6}>
-                          <FormGroup>
-                            <Label for="exampleEmail">Email</Label>
-                            <Input
-                              type="email"
-                              name="email"
-                              id="exampleEmail"
-                              placeholder="Email"
-                              onChange={(e) => setLoginEmail(e.target.value)}
-                            />
-                          </FormGroup>
-                          <FormGroup>
-                            <Label for="examplePassword">Password</Label>
-                            <Input
-                              type="password"
-                              name="password"
-                              id="examplePassword"
-                              placeholder="Password"
-                              onChange={(e) => setLoginPassword(e.target.value)}
-                            />
-                          </FormGroup>
-                        </Col>
-                      </Row>
-                    </Form>
-                  </ModalBody>
-                  <ModalFooter>
-                    <Button
-                      color="primary"
-                      onMouseUp={toggle2}
-                      onMouseDown={clickHandler2}
-                    >
-                      Login
-                    </Button>{" "}
-                  </ModalFooter>
-                </Modal>
-              </div>
-              <div>
-                <Button color="primary" onClick={toggle3}>
-                  Sign Up
-                </Button>
-                <Modal isOpen={modal2} toggle={toggle3}>
-                  <ModalHeader toggle={toggle3}>Sign Up</ModalHeader>
-                  <ModalBody>
-                    <Form>
-                      <Row form>
-                        <Col md={6}>
-                          <FormGroup>
-                            <Label for="name">Name</Label>
-                            <Input
-                              type="name"
-                              name="name"
-                              id="username"
-                              placeholder="Name"
-                              onChange={(e) => setUserName(e.target.value)}
-                            />
-                          </FormGroup>
-                          <FormGroup>
-                            <Label for="exampleEmail">Email</Label>
-                            <Input
-                              type="email"
-                              name="email"
-                              id="email"
-                              placeholder="Email"
-                              onChange={(e) => setUserEmail(e.target.value)}
-                            />
-                          </FormGroup>
-                          <FormGroup>
-                            <Label for="examplePassword">Password</Label>
-                            <Input
-                              type="password"
-                              name="password"
-                              id="password"
-                              placeholder="Password"
-                              onChange={(e) => setUserPassword(e.target.value)}
-                            />
-                          </FormGroup>
-                        </Col>
-                      </Row>
-                    </Form>
-                  </ModalBody>
-                  <ModalFooter>
-                    <Button
-                      color="primary"
-                      onMouseDown={clickHandler}
-                      onMouseUp={toggle3}
-                    >
-                      Sign Up
-                    </Button>{" "}
-                  </ModalFooter>
-                </Modal>
-              </div>
-              <Col className="align-self-end">
+              </NavItem>
+
+              <NavItem onClick={toggle3}>
+                <Button color="primary">Sign Up</Button>
+              </NavItem>
+              {/* <Col className="align-self-end">
                 <UncontrolledDropdown nav inNavbar>
                   <DropdownToggle nav caret>
                     Options
@@ -260,11 +170,101 @@ function Navi({
                     <DropdownItem>Reset</DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
-              </Col>
+              </Col> */}
             </Nav>
           </Collapse>
         </Container>
       </Navbar>
+      <Modal isOpen={modal} toggle={toggle2}>
+        <ModalHeader toggle={toggle2}>Login</ModalHeader>
+        <ModalBody>
+          <Form>
+            <Row form>
+              <Col md={6}>
+                <FormGroup>
+                  <Label for="exampleEmail">Email</Label>
+                  <Input
+                    type="email"
+                    name="email"
+                    id="exampleEmail"
+                    placeholder="Email"
+                    onChange={(e) => setLoginEmail(e.target.value)}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="examplePassword">Password</Label>
+                  <Input
+                    type="password"
+                    name="password"
+                    id="examplePassword"
+                    placeholder="Password"
+                    onChange={(e) => setLoginPassword(e.target.value)}
+                  />
+                </FormGroup>
+              </Col>
+            </Row>
+          </Form>
+        </ModalBody>
+        <ModalFooter>
+          <Button
+            color="primary"
+            onMouseUp={toggle2}
+            onMouseDown={clickHandler2}
+          >
+            Login
+          </Button>{" "}
+        </ModalFooter>
+      </Modal>
+      <Modal isOpen={modal2} toggle={toggle3}>
+        <ModalHeader toggle={toggle3}>Sign Up</ModalHeader>
+        <ModalBody>
+          <Form>
+            <Row form>
+              <Col md={6}>
+                <FormGroup>
+                  <Label for="name">Name</Label>
+                  <Input
+                    type="name"
+                    name="name"
+                    id="username"
+                    placeholder="Name"
+                    onChange={(e) => setUserName(e.target.value)}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="exampleEmail">Email</Label>
+                  <Input
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="Email"
+                    onChange={(e) => setUserEmail(e.target.value)}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="examplePassword">Password</Label>
+                  <Input
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="Password"
+                    onChange={(e) => setUserPassword(e.target.value)}
+                  />
+                </FormGroup>
+              </Col>
+            </Row>
+          </Form>
+        </ModalBody>
+        <ModalFooter>
+          <Button
+            color="primary"
+            onMouseDown={clickHandler}
+            onMouseUp={toggle3}
+          >
+            Sign Up
+          </Button>{" "}
+        </ModalFooter>
+      </Modal>
     </div>
   );
 }

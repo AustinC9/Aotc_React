@@ -21,7 +21,7 @@ function Post({ posts, setPosts, bearer }) {
       .then((res) => setPosts(res.data))
       .catch((err) => console.log("error: ", err));
   }, []);
-  //console.log(posts);
+  console.log(posts);
   const allPosts = posts;
   //console.log(allPosts)
 
@@ -30,10 +30,11 @@ function Post({ posts, setPosts, bearer }) {
   allPosts.map((item, idx) => {
     return (
       <>
-      <Card key={idx}>
+      <Card key={idx} >
           <CardTitle>
               {item.title}
           </CardTitle>
+          <CardSubtitle>Posted By:{item.user.name}</CardSubtitle>
           <CardBody>
               {item.body}
           </CardBody>

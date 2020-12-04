@@ -3,6 +3,7 @@ import Navi from "./Navi";
 import Post from "./Post";
 import LoggedIn from "./LoggedIn";
 import UserDashBoard from "./UserDashBoard";
+import { AppProvider } from './AppContext';
 
 //import { fa-reddit } from '@fortawesome/free-brands-svg-icons';
 
@@ -23,34 +24,55 @@ function App() {
   const [postBody, setPostBody] = useState("");
   const [modal5, setModal5] = useState(false);
   const [userPosts, setUserPosts] = useState();
+  // const [history, useHistory] = useHistory();
+
+  const initialContext = {
+    userName,
+    setUserName,
+    userEmail,
+    setUserEmail,
+    userPassword,
+    setUserPassword,
+    isOpen,
+    setIsOpen4,
+    modal,
+    setModal,
+    modal2,
+    setModal2,
+    loginEmail,
+    setLoginEmail,
+    loginPassword,
+    setLoginPassword,
+    bearer,
+    setBearer,
+    posts,
+    setPosts,
+    login,
+    setLogin,
+    isOpen4,
+    setIsOpen4,
+    postTitle,
+    setPostTitle,
+    postBody,
+    setPostBody,
+    modal5,
+    setModal5,
+    userPosts,
+    setUserPosts
+  }
 
   if (login !== false) {
     return (
+      <AppProvider value={initialContext}>
       <div>
-        <LoggedIn
-          isOpen4={isOpen4}
-          setIsOpen4={setIsOpen4}
-          modal5={modal5}
-          setModal5={setModal5}
-          postTitle={postTitle}
-          setPostTitle={setPostTitle}
-          postBody={postBody}
-          setPostBody={setPostBody}
-          bearer={bearer}
-          userPosts={userPosts}
-          setUserPosts={setUserPosts}
-          login={login}
-          setLogin={setLogin}
-        />
-        <UserDashBoard
-          bearer={bearer}
-          userPosts={userPosts}
-          setUserPosts={setUserPosts}
-        />
+        <LoggedIn />
+        <UserDashBoard />
       </div>
+    </AppProvider>
     );
   } else {
     return (
+      <AppProvider value={initialContext}>
       <div>
         <Navi
           userName={userName}
@@ -77,6 +99,7 @@ function App() {
 
         <Post posts={posts} setPosts={setPosts} />
       </div>
+      </AppProvider>
     );
   }
 }

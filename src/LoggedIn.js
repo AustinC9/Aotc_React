@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import axios from "axios";
+import AppContext from "./AppContext";
 import {
   Collapse,
   Navbar,
@@ -29,21 +30,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faReddit } from "@fortawesome/free-brands-svg-icons";
 //import { useEffect } from "react";
 
-function LoggedIn({
-  isOpen4,
-  setIsOpen4,
-  modal5,
-  setModal5,
-  postBody,
-  setPostBody,
-  postTitle,
-  setPostTitle,
-  bearer,
-  login,
-  setLogin
-}) {
-  const toggle4 = () => setIsOpen4(!isOpen4);
-  const toggle5 = () => setModal5(!modal5);
+function LoggedIn({}) {
+  const context = useContext(AppContext);
+  const toggle4 = () => context.setIsOpen4(!context.isOpen4);
+  const toggle5 = () => context.setModal5(!context.modal5);
 
   const clickHandler = () => {
     const url = "http://localhost:8000/newpost";
@@ -51,10 +41,10 @@ function LoggedIn({
     const headers = {
       "Content-Type": "application/json",
       Accept: "application/json",
-      Authorization: `Bearer ${bearer}`,
+      Authorization: `Bearer ${context.bearer}`,
     };
-    const body = { title: postTitle, body: postBody };
-    const data = { title: postTitle, body: postBody };
+    const body = { title: context.postTitle, body: context.postBody };
+    const data = { title: context.postTitle, body: context.postBody };
     axios({
       url,
       method,
@@ -62,25 +52,42 @@ function LoggedIn({
       body,
       data,
     })
-      .then((res) => console.log(res))
+      .then((res) => console.log(res), updatePosts())
       .catch((err) => console.log("error: ", err));
   };
+  function updatePosts() {
+    const url = "http://localhost:8000/userposts";
+    const method = "get";
+    const headers = {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: `Bearer ${context.bearer}`,
+    };
+    axios({
+      url,
+      method,
+      headers,
+    })
+      .then((res) => context.setUserPosts(prevPost => prevPost =res.data), console.log("YURTTTTTT"))
+      .catch((err) => console.log("error: ", err))
+      .then();
+  }
   const logout = () => {
     const url = "http://localhost:8000/logout";
     const method = "get";
     const headers = {
       "Content-Type": "application/json",
       Accept: "application/json",
-      Authorization: `Bearer ${bearer}`,
+      Authorization: `Bearer ${context.bearer}`,
     };
     axios({
-        url,
-        method,
-        headers
+      url,
+      method,
+      headers,
     })
-    .then(() => setLogin(false))
-    .catch((err) => console.log("error: ", err))
-  }
+      .then(() => context.setLogin(false))
+      .catch((err) => console.log("error: ", err));
+  };
 
   return (
     <div>
@@ -95,7 +102,7 @@ function LoggedIn({
         </NavbarBrand>
         <Container className="d-flex">
           <NavbarToggler onClick={toggle4} />
-          <Collapse isOpen={isOpen4} navbar>
+          <Collapse isOpen={context.isOpen4} navbar>
             <Nav className="mr-auto" navbar>
               <NavItem>
                 <NavLink href="/components/">Components</NavLink>
@@ -109,7 +116,7 @@ function LoggedIn({
                 >
                   New Post
                 </Button>
-                <Modal isOpen={modal5} toggle={toggle5}>
+                <Modal isOpen={context.modal5} toggle={toggle5}>
                   <ModalHeader toggle={toggle5}>Create Post</ModalHeader>
                   <ModalBody>
                     <Form>
@@ -122,7 +129,7 @@ function LoggedIn({
                               name="title"
                               id="title"
                               placeholder="Title"
-                              onChange={(e) => setPostTitle(e.target.value)}
+                              onChange={(e) => context.setPostTitle(e.target.value)}
                             />
                           </FormGroup>
                           <FormGroup>
@@ -132,7 +139,7 @@ function LoggedIn({
                               name="body"
                               id="body"
                               placeholder="Body"
-                              onChange={(e) => setPostBody(e.target.value)}
+                              onChange={(e) => context.setPostBody(e.target.value)}
                             />
                           </FormGroup>
                         </Col>
@@ -151,9 +158,7 @@ function LoggedIn({
                 </Modal>
               </div>
               <div>
-                <Button
-                  color="primary" onMouseDown={logout}
-                >
+                <Button color="primary" onMouseDown={logout}>
                   Log Out
                 </Button>
               </div>
@@ -175,7 +180,6 @@ function LoggedIn({
         </Container>
       </Navbar>
     </div>
-    
   );
 }
 
