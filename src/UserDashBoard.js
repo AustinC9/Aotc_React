@@ -37,6 +37,7 @@ function UserDashBoard({}) {
         return (
           <>
             <Card key={idx}>
+
               <CardTitle>{item.title}</CardTitle>
               <CardBody>{item.body}</CardBody>
             </Card>

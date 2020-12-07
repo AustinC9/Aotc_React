@@ -29,34 +29,15 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faReddit } from "@fortawesome/free-brands-svg-icons";
 import { useContext, useEffect } from "react";
-import "./Navi.css";
+import "./App.css";
 
 function Navi({
-  userName,
-  userEmail,
-  userPassword,
-  setUserName,
-  setUserEmail,
-  setUserPassword,
-  isOpen,
-  setIsOpen,
-  modal,
-  setModal,
-  modal2,
-  setModal2,
-  loginEmail,
-  setLoginEmail,
-  loginPassword,
-  setLoginPassword,
-  bearer,
-  setBearer,
-  login,
-  setLogin,
 }) {
   const context = useContext(AppContext);
-  const toggle2 = () => setModal(!modal);
-  const toggle3 = () => setModal2(!modal2);
-  const toggle = () => setIsOpen(!isOpen);
+  const toggle2 = () => context.setModal(!context.modal);
+  const toggle3 = () => context.setModal2(!context.modal2);
+  const toggle = () => context.setIsOpen(!context.isOpen);
+
 
   const clickHandler = () => {
     const url = "http://localhost:8000/register";
@@ -65,8 +46,8 @@ function Navi({
       "Content-Type": "application/json;charset=UTF-8",
       "Access-Control-Allow-Origin": "*",
     };
-    const body = { name: userName, email: userEmail, password: userPassword };
-    const data = { name: userName, email: userEmail, password: userPassword };
+    const body = { name: context.userName, email: context.userEmail, password: context.userPassword };
+    const data = { name: context.userName, email: context.userEmail, password: context.userPassword };
     axios({
       url,
       method,
@@ -88,9 +69,9 @@ function Navi({
     const data = {
       grant_type: "password",
       client_id: 2,
-      client_secret: "WRwtnxeHIEeaRksqpLpubm7ATdCbu30XyXa2udCc",
-      password: loginPassword,
-      username: loginEmail,
+      client_secret: "VYmXFly1MteogwguvwdLf0BwEo2vMBmlI22r9rLF",
+      password: context.loginPassword,
+      username: context.loginEmail,
       scope: "",
     };
     axios({
@@ -101,28 +82,28 @@ function Navi({
     })
       .then(
         (res) =>
-          setBearer((prevBearer) => (prevBearer = res.data.access_token)),
-        console.log("logged in")
+        context.setBearer((prevBearer) => (prevBearer = res.data.access_token)),
+        console.log(data)
       )
       .catch((err) => console.log("error: ", err));
-    console.log(bearer);
+    console.log(context.bearer);
   };
   useEffect(() => {
     {
-      bearer &&
+      context.bearer &&
         axios({
           url: "http://localhost:8000/api/user",
           method: "get",
           headers: {
             Accept: "application/json",
-            Authorization: `Bearer ${bearer}`,
+            Authorization: `Bearer ${context.bearer}`,
           },
         })
-          .then(() => setLogin(true), console.log(login))
+          .then(() => context.setLogin(true), console.log(context.login))
           .catch((err) => console.log("error: ", err));
     }
-    console.log(bearer);
-  }, [bearer]);
+    console.log(context.bearer);
+  }, [context.bearer]);
 
   // .catch(err => console.log('error: ', err))
   return (
@@ -138,7 +119,8 @@ function Navi({
         </NavbarBrand>
         <Container className="d-flex justify-content-end">
           <NavbarToggler onClick={toggle} />
-          <Collapse isOpen={isOpen} navbar>
+          <Collapse isOpen={context.isOpen} navbar>
+          <div className="navi">
             <Nav pills>
               {/* <NavItem>
                 <NavLink href="/components/">Components</NavLink>
@@ -172,10 +154,11 @@ function Navi({
                 </UncontrolledDropdown>
               </Col> */}
             </Nav>
+            </div>
           </Collapse>
         </Container>
       </Navbar>
-      <Modal isOpen={modal} toggle={toggle2}>
+      <Modal isOpen={context.modal} toggle={toggle2}>
         <ModalHeader toggle={toggle2}>Login</ModalHeader>
         <ModalBody>
           <Form>
@@ -188,7 +171,7 @@ function Navi({
                     name="email"
                     id="exampleEmail"
                     placeholder="Email"
-                    onChange={(e) => setLoginEmail(e.target.value)}
+                    onChange={(e) => context.setLoginEmail(e.target.value)}
                   />
                 </FormGroup>
                 <FormGroup>
@@ -198,7 +181,7 @@ function Navi({
                     name="password"
                     id="examplePassword"
                     placeholder="Password"
-                    onChange={(e) => setLoginPassword(e.target.value)}
+                    onChange={(e) => context.setLoginPassword(e.target.value)}
                   />
                 </FormGroup>
               </Col>
@@ -215,7 +198,7 @@ function Navi({
           </Button>{" "}
         </ModalFooter>
       </Modal>
-      <Modal isOpen={modal2} toggle={toggle3}>
+      <Modal isOpen={context.modal2} toggle={toggle3}>
         <ModalHeader toggle={toggle3}>Sign Up</ModalHeader>
         <ModalBody>
           <Form>
@@ -228,7 +211,7 @@ function Navi({
                     name="name"
                     id="username"
                     placeholder="Name"
-                    onChange={(e) => setUserName(e.target.value)}
+                    onChange={(e) => context.setUserName(e.target.value)}
                   />
                 </FormGroup>
                 <FormGroup>
@@ -238,7 +221,7 @@ function Navi({
                     name="email"
                     id="email"
                     placeholder="Email"
-                    onChange={(e) => setUserEmail(e.target.value)}
+                    onChange={(e) => context.setUserEmail(e.target.value)}
                   />
                 </FormGroup>
                 <FormGroup>
@@ -248,7 +231,7 @@ function Navi({
                     name="password"
                     id="password"
                     placeholder="Password"
-                    onChange={(e) => setUserPassword(e.target.value)}
+                    onChange={(e) => context.setUserPassword(e.target.value)}
                   />
                 </FormGroup>
               </Col>

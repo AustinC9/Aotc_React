@@ -1,0 +1,49 @@
+.login {
+  margin-right: 950px;
+  justify-content: right
+  ;
+}
+/* .loginBtn{
+    margin-right: 600px;
+} */
+
+.navi{
+    justify-content: right;
+}
+
+.posts {
+  /* background-color: aquamarine; */
+  margin: 20px;
+  padding: 20px;
+}
+
+.postContainer {
+  margin: 20px;
+  padding: 20px;
+  /* font-family: 'Lato', sans-serif; */
+}
+.title {
+  font-family: "Major Mono Display", monospace;
+  font-size: 50px;
+  font-size: 72px;
+  background: -webkit-linear-gradient(#eee, #333);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* color: linear-gradient(
+    90deg,
+    rgba(131, 58, 180, 1) 0%,
+    rgba(253, 29, 29, 1) 50%,
+    rgba(252, 176, 69, 1) 100%
+  ); */
+}
+
+.body{
+    font-family: 'Press Start 2P', cursive;
+    font-size: 50px;
+  background: -webkit-linear-gradient(90deg,
+  rgb(54, 0, 90),
+  rgb(9, 255, 0),
+  rgb(255, 61, 213));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

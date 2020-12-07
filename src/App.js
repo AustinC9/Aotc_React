@@ -3,7 +3,9 @@ import Navi from "./Navi";
 import Post from "./Post";
 import LoggedIn from "./LoggedIn";
 import UserDashBoard from "./UserDashBoard";
-import { AppProvider } from './AppContext';
+import { AppProvider } from "./AppContext";
+import { Container } from "reactstrap";
+import "./App.css";
 
 //import { fa-reddit } from '@fortawesome/free-brands-svg-icons';
 
@@ -50,7 +52,6 @@ function App() {
     login,
     setLogin,
     isOpen4,
-    setIsOpen4,
     postTitle,
     setPostTitle,
     postBody,
@@ -58,47 +59,35 @@ function App() {
     modal5,
     setModal5,
     userPosts,
-    setUserPosts
-  }
+    setUserPosts,
+  };
 
   if (login !== false) {
     return (
       <AppProvider value={initialContext}>
-      <div>
-        <LoggedIn />
-        <UserDashBoard />
-      </div>
-    </AppProvider>
+        <div>
+          <LoggedIn />
+          <UserDashBoard />
+        </div>
+      </AppProvider>
     );
   } else {
     return (
       <AppProvider value={initialContext}>
-      <div>
-        <Navi
-          userName={userName}
-          userEmail={userEmail}
-          userPassword={userPassword}
-          setUserName={setUserName}
-          setUserEmail={setUserEmail}
-          setUserPassword={setUserPassword}
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-          modal={modal}
-          modal2={modal2}
-          setModal={setModal}
-          setModal2={setModal2}
-          loginEmail={loginEmail}
-          setLoginEmail={setLoginEmail}
-          loginPassword={loginPassword}
-          setLoginPassword={setLoginPassword}
-          bearer={bearer}
-          setBearer={setBearer}
-          login={login}
-          setLogin={setLogin}
-        />
+        <div className="bg-secondary">
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
+            rel="stylesheet"
+          />
 
-        <Post posts={posts} setPosts={setPosts} />
-      </div>
+          <Navi
+          className="navi"
+          />
+          <Container className="bg-dark postContainer">
+            <Post posts={posts} setPosts={setPosts} />
+          </Container>
+        </div>
       </AppProvider>
     );
   }
