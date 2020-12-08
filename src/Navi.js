@@ -110,7 +110,7 @@ function Navi() {
             spin
             className="mr-3"
           />{" "}
-          <NavbarText color="white" className="pr-5 h2">
+          <NavbarText color="white" className="pr-5 h2 liker">
             LIKER
           </NavbarText>
         </NavbarBrand>

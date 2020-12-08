@@ -40,6 +40,7 @@ function UserDashBoard({}) {
 
               <CardTitle className="title">{item.title}</CardTitle>
               <CardBody className="body">{item.body}</CardBody>
+              
             </Card>
           </>
         );

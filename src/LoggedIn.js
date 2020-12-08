@@ -106,7 +106,7 @@ function LoggedIn({}) {
       <Navbar style={{backgroundColor:"#B9B7A7"}} light expand="md">
         <NavbarBrand href="/">
           <FontAwesomeIcon icon={faThumbsUp}  color="#7C90A0" size="2x" spin className="mr-3" />{" "}
-          <NavbarText color="white" className="pr-5 h2">LIKER</NavbarText>
+          <NavbarText color="white" className="pr-5 h2 liker">LIKER</NavbarText>
         </NavbarBrand>
         <Container className="d-flex">
           <NavbarToggler onClick={toggle4} />
@@ -121,13 +121,13 @@ function LoggedIn({}) {
                   New Post
                 </Button>
                 <Modal isOpen={context.modal5} toggle={toggle5}>
-                  <ModalHeader toggle={toggle5}>Create Post</ModalHeader>
-                  <ModalBody>
+                  <ModalHeader style={{ backgroundColor: "#B9B7A7" }} toggle={toggle5}>Create Post</ModalHeader>
+                  <ModalBody style={{ backgroundColor: "#4E5166" }}>
                     <Form>
                       <Row form>
                         <Col md={6}>
                           <FormGroup>
-                            <Label for="title">Title</Label>
+                            <Label className="label" for="title">Title</Label>
                             <Input
                               type="text"
                               name="title"
@@ -139,7 +139,7 @@ function LoggedIn({}) {
                             />
                           </FormGroup>
                           <FormGroup>
-                            <Label for="postBody">Body</Label>
+                            <Label className="label" for="postBody">Body</Label>
                             <Input
                               type="text"
                               name="body"
@@ -154,9 +154,9 @@ function LoggedIn({}) {
                       </Row>
                     </Form>
                   </ModalBody>
-                  <ModalFooter>
+                  <ModalFooter style={{ backgroundColor: "#B9B7A7" }}>
                     <Button
-                      color="primary"
+                      style={{backgroundColor:"#747274"}}
                       onMouseUp={toggle5}
                       onMouseDown={clickHandler}
                     >

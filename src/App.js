@@ -28,6 +28,7 @@ function App() {
   const [modal5, setModal5] = useState(false);
   const [userPosts, setUserPosts] = useState();
   const [user, setUser] = useState({});
+  const [heroku] = 'https://cors-anywhere.herokuapp.com/https://liker-project.herokuapp.com'
   // const [history, useHistory] = useHistory();
 
   const initialContext = {
@@ -64,6 +65,7 @@ function App() {
     setUserPosts,
     user,
     setUser,
+    heroku
   };
   useEffect(() => {
     const lstoken = window.localStorage.getItem("token");
@@ -105,7 +107,7 @@ function App() {
           <Container className="postContainer" style={{backgroundColor:'#B5AA9D'}}>
           <Row className="h1 text-center">
           <Col>
-          <h1 className="h1 text-center yourPost">Your Posts</h1>
+          <h1 className="h1 text-center yourposts" style={{}}>Your Posts</h1>
           </Col>
           </Row>
           <Row>
@@ -118,7 +120,17 @@ function App() {
           </>
         )}
         <Container className="postContainer" style={{backgroundColor:'#B5AA9D'}}>
+        <Row className="h1 text-center">
+          <Col>
+          <h1 className="h1 text-center yourposts" style={{}}>All Public Posts</h1>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
           <Post posts={posts} setPosts={setPosts} />
+
+          </Col>
+        </Row>
         </Container>
       </div>
     </AppProvider>

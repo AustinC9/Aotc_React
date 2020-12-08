@@ -18,7 +18,7 @@ import { faThumbsUp, faThumbsDown } from "@fortawesome/free-solid-svg-icons";
 function Post() {
   const context = useContext(AppContext);
   useEffect(() => {
-    const url = "http://localhost:8000/posts";
+    const url = `http://localhost:8000/posts`;
     const method = "get";
     axios({
       url,
@@ -129,8 +129,8 @@ function Post() {
         const dislikes = post.likes.filter((p) => p.liked == 0);
         return (
           <>
-            <link rel="preconnect" href="https://fonts.gstatic.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Oldenburg&family=Roboto+Slab&display=swap" rel="stylesheet"/>
+            {/* <link rel="preconnect" href="https://fonts.gstatic.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Oldenburg&family=Roboto+Slab&display=swap" rel="stylesheet"/> */}
             <Card
               key={idx}
               className="posts"
