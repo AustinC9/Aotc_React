@@ -33,13 +33,11 @@ function Post() {
     const foundUser = post.likes.find((p) => p.user_id == context.user.id);
     if (foundUser) {
       if (foundUser.liked == 1) {
-        deletelike(post.id)
-      }
-      else {
+        deletelike(post.id);
+      } else {
         //switch from disliked to liked
       }
-    }
-    else {
+    } else {
       createLike(post.id);
     }
   };
@@ -82,14 +80,11 @@ function Post() {
     const foundUser = post.likes.find((p) => p.user_id == context.user.id);
     if (foundUser) {
       if (foundUser.liked == 0) {
-        deleteDislike(post.id)
-        
-      }
-      else {
+        deleteDislike(post.id);
+      } else {
         //switch from disliked to liked
       }
-    }
-    else {
+    } else {
       createDislike(post.id);
     }
   };
@@ -134,29 +129,31 @@ function Post() {
         const dislikes = post.likes.filter((p) => p.liked == 0);
         return (
           <>
-            <link rel="preconnect" href="https://fonts.gstatic.com" />
-            <link
-              href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap"
-              rel="stylesheet"
-            />
-            <link rel="preconnect" href="https://fonts.gstatic.com" />
-            <link
-              href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
-              rel="stylesheet"
-            ></link>
-            <Card key={idx} className="posts" style={{backgroundColor:'#747274'}}>
+            <link rel="preconnect" href="https://fonts.gstatic.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Oldenburg&family=Roboto+Slab&display=swap" rel="stylesheet"/>
+            <Card
+              key={idx}
+              className="posts"
+              style={{ backgroundColor: "#747274" }}
+            >
               <CardTitle className="title">{post.title}</CardTitle>
-              <CardSubtitle>Posted By:{post.user.name}</CardSubtitle>
+              <CardSubtitle className="author">Posted By:{post.user.name}</CardSubtitle>
               <CardBody className="body">{post.body}</CardBody>
               <Row>
-                <Button onClick={() => setLike(post)} style={{backgroundColor:'#B9B7A7'}}>
+                <Button
+                  onClick={() => setLike(post)}
+                  style={{ backgroundColor: "#B9B7A7" }}
+                >
                   <FontAwesomeIcon
                     icon={faThumbsUp}
                     className=""
                   ></FontAwesomeIcon>{" "}
                   {likes.length}
                 </Button>
-                <Button onClick={() => setDislike(post)} style={{backgroundColor:'#B9B7A7'}}>
+                <Button
+                  onClick={() => setDislike(post)}
+                  style={{ backgroundColor: "#B9B7A7" }}
+                >
                   <FontAwesomeIcon icon={faThumbsDown}></FontAwesomeIcon>{" "}
                   {dislikes.length}
                 </Button>

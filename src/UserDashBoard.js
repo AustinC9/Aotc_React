@@ -36,10 +36,10 @@ function UserDashBoard({}) {
     ? context.userPosts.map((item, idx) => {
         return (
           <>
-            <Card key={idx}>
+            <Card key={idx} style={{ backgroundColor: "#747274" }} className='posts'>
 
-              <CardTitle>{item.title}</CardTitle>
-              <CardBody>{item.body}</CardBody>
+              <CardTitle className="title">{item.title}</CardTitle>
+              <CardBody className="body">{item.body}</CardBody>
             </Card>
           </>
         );

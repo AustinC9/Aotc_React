@@ -9,6 +9,7 @@ import {
   Nav,
   NavItem,
   NavLink,
+  NavbarText,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
@@ -27,7 +28,7 @@ import {
   Container,
 } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faReddit } from "@fortawesome/free-brands-svg-icons";
+import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 //import { useEffect } from "react";
 
 function LoggedIn({}) {
@@ -102,22 +103,18 @@ function LoggedIn({}) {
         href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap"
         rel="stylesheet"
       ></link>
-      <Navbar color="white" light expand="md">
+      <Navbar style={{backgroundColor:"#B9B7A7"}} light expand="md">
         <NavbarBrand href="/">
-          <FontAwesomeIcon icon={faReddit} color="red" size="2x" spin />
-          reddit
+          <FontAwesomeIcon icon={faThumbsUp}  color="#7C90A0" size="2x" spin className="mr-3" />{" "}
+          <NavbarText color="white" className="pr-5 h2">LIKER</NavbarText>
         </NavbarBrand>
         <Container className="d-flex">
           <NavbarToggler onClick={toggle4} />
           <Collapse isOpen={context.isOpen4} navbar>
             <Nav className="mr-auto" navbar>
-              <NavItem>
-                <NavLink href="/components/">Components</NavLink>
-              </NavItem>
               <div className="login">
                 <Button
-                  outline
-                  color="primary"
+                // color="primary"
                   //onMouseDown={console.log("new post")}
                   onClick={toggle5}
                 >
@@ -169,23 +166,10 @@ function LoggedIn({}) {
                 </Modal>
               </div>
               <div>
-                <Button color="primary" onMouseDown={logout}>
+                <Button style={{backgroundColor:"#747274"}} onMouseDown={logout}>
                   Log Out
                 </Button>
               </div>
-              <Col className="align-self-end">
-                <UncontrolledDropdown nav inNavbar>
-                  <DropdownToggle nav caret>
-                    Options
-                  </DropdownToggle>
-                  <DropdownMenu>
-                    <DropdownItem>Option 1</DropdownItem>
-                    <DropdownItem>Option 2</DropdownItem>
-                    <DropdownItem divider />
-                    <DropdownItem>Reset</DropdownItem>
-                  </DropdownMenu>
-                </UncontrolledDropdown>
-              </Col>
             </Nav>
           </Collapse>
         </Container>

@@ -58,9 +58,9 @@ function Navi() {
       data,
     })
       .then((res) => {
-        context.setBearer(res.data.data.token)
-          window.localStorage.setItem('token', res.data.data.token)
-        console.log(res)
+        context.setBearer(res.data.data.token);
+        window.localStorage.setItem("token", res.data.data.token);
+        console.log(res);
       })
       .catch((err) => console.log("error: ", err));
   };
@@ -86,12 +86,10 @@ function Navi() {
       headers,
       data,
     })
-      .then(
-        (res) =>{
-          context.setBearer(res.data.access_token)
-          window.localStorage.setItem('token', res.data.access_token)
-}
-      )
+      .then((res) => {
+        context.setBearer(res.data.access_token);
+        window.localStorage.setItem("token", res.data.access_token);
+      })
       .catch((err) => console.log("error: ", err));
     console.log(context.bearer);
   };
@@ -103,10 +101,18 @@ function Navi() {
         href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap"
         rel="stylesheet"
       ></link>
-      <Navbar style={{backgroundColor:"#B9B7A7"}} light expand="md">
+      <Navbar style={{ backgroundColor: "#B9B7A7" }} light expand="md">
         <NavbarBrand href="/" className="pr-5">
-          <FontAwesomeIcon icon={faThumbsUp} color="#7C90A0" size="2x" spin className="mr-3" />{" "}
-          <NavbarText color="white" className="pr-5 h2">LIKER</NavbarText>
+          <FontAwesomeIcon
+            icon={faThumbsUp}
+            color="#7C90A0"
+            size="2x"
+            spin
+            className="mr-3"
+          />{" "}
+          <NavbarText color="white" className="pr-5 h2">
+            LIKER
+          </NavbarText>
         </NavbarBrand>
         <Container className="d-flex justify-content-end">
           <NavbarToggler onClick={toggle} />
@@ -123,13 +129,13 @@ function Navi() {
             </NavItem> */}
 
                 <NavItem onClick={toggle2} className="login">
-                  <Button outline>
-                    Login
-                  </Button>
+                  <Button outline>Login</Button>
                 </NavItem>
 
                 <NavItem onClick={toggle3}>
-                  <Button style={{backgroundColor:"#747274"}}>Sign Up</Button>
+                  <Button style={{ backgroundColor: "#747274" }}>
+                    Sign Up
+                  </Button>
                 </NavItem>
                 {/* <Col className="align-self-end">
                 <UncontrolledDropdown nav inNavbar>
@@ -150,13 +156,15 @@ function Navi() {
         </Container>
       </Navbar>
       <Modal isOpen={context.modal} toggle={toggle2}>
-        <ModalHeader toggle={toggle2}>Login</ModalHeader>
-        <ModalBody>
+        <ModalHeader style={{ backgroundColor: "#B9B7A7" }} toggle={toggle2}>
+          Login
+        </ModalHeader>
+        <ModalBody style={{ backgroundColor: "#4E5166" }}>
           <Form>
             <Row form>
               <Col md={6}>
                 <FormGroup>
-                  <Label for="exampleEmail">Email</Label>
+                  <Label for="exampleEmail" className="label">Email</Label>
                   <Input
                     type="email"
                     name="email"
@@ -166,8 +174,9 @@ function Navi() {
                   />
                 </FormGroup>
                 <FormGroup>
-                  <Label for="examplePassword">Password</Label>
+                  <Label for="examplePassword" className="label">Password</Label>
                   <Input
+                   style={{ backgroundColor: "989698" }}
                     type="password"
                     name="password"
                     id="examplePassword"
@@ -179,9 +188,9 @@ function Navi() {
             </Row>
           </Form>
         </ModalBody>
-        <ModalFooter>
+        <ModalFooter style={{ backgroundColor: "#B9B7A7" }}>
           <Button
-            color="primary"
+            style={{ backgroundColor: "#4E5166" }}
             onMouseUp={toggle2}
             onMouseDown={clickHandler2}
           >
@@ -190,13 +199,13 @@ function Navi() {
         </ModalFooter>
       </Modal>
       <Modal isOpen={context.modal2} toggle={toggle3}>
-        <ModalHeader toggle={toggle3}>Sign Up</ModalHeader>
-        <ModalBody>
+        <ModalHeader style={{ backgroundColor: "#B9B7A7" }} toggle={toggle3}>Sign Up</ModalHeader>
+        <ModalBody style={{ backgroundColor: "#4E5166" }}>
           <Form>
             <Row form>
               <Col md={6}>
                 <FormGroup>
-                  <Label for="name">Name</Label>
+                  <Label for="name" className="label">Name</Label>
                   <Input
                     type="name"
                     name="name"
@@ -206,7 +215,7 @@ function Navi() {
                   />
                 </FormGroup>
                 <FormGroup>
-                  <Label for="exampleEmail">Email</Label>
+                  <Label for="exampleEmail" className="label">Email</Label>
                   <Input
                     type="email"
                     name="email"
@@ -216,7 +225,7 @@ function Navi() {
                   />
                 </FormGroup>
                 <FormGroup>
-                  <Label for="examplePassword">Password</Label>
+                  <Label for="examplePassword" className='label'>Password</Label>
                   <Input
                     type="password"
                     name="password"
@@ -229,9 +238,9 @@ function Navi() {
             </Row>
           </Form>
         </ModalBody>
-        <ModalFooter>
+        <ModalFooter style={{ backgroundColor: "#B9B7A7" }}>
           <Button
-            color="primary"
+            style={{ backgroundColor: "#4E5166" }}
             onMouseDown={clickHandler}
             onMouseUp={toggle3}
           >

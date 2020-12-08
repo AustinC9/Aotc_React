@@ -4,7 +4,7 @@ import Post from "./Post";
 import LoggedIn from "./LoggedIn";
 import UserDashBoard from "./UserDashBoard";
 import { AppProvider } from "./AppContext";
-import { Container } from "reactstrap";
+import { Container, Row,Col } from "reactstrap";
 import axios from "axios";
 import "./App.css";
 
@@ -102,7 +102,19 @@ function App() {
         ) : (
           <>
             <LoggedIn />
+          <Container className="postContainer" style={{backgroundColor:'#B5AA9D'}}>
+          <Row className="h1 text-center">
+          <Col>
+          <h1 className="h1 text-center yourPost">Your Posts</h1>
+          </Col>
+          </Row>
+          <Row>
+
+          <Col>
             <UserDashBoard />
+            </Col>
+            </Row>
+            </Container>
           </>
         )}
         <Container className="postContainer" style={{backgroundColor:'#B5AA9D'}}>

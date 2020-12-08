@@ -23,10 +23,9 @@
   /* font-family: 'Lato', sans-serif; */
 }
 .title {
-  font-family: "Major Mono Display", monospace;
-  font-size: 50px;
+  font-family: 'Roboto Slab', serif;
   font-size: 72px;
-  background: -webkit-linear-gradient(#eee, #333);
+  background: -webkit-linear-gradient( #B9B7A7,#F5F5F5 );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   /* color: linear-gradient(
@@ -36,17 +35,31 @@
     rgba(252, 176, 69, 1) 100%
   ); */
 }
+.label{
+  color: #D6D6D6;
+}
 
 .body{
-    font-family: 'Press Start 2P', cursive;
-    font-size: 50px;
+  font-family: 'Oldenburg', cursive;
+      font-size: 50px;
   background: -webkit-linear-gradient(90deg,
-  rgb(54, 0, 90),
-  rgb(9, 255, 0),
-  rgb(255, 61, 213));
+  rgb(71, 74, 93),
+  rgb(245, 255, 245),
+  rgb(152, 150, 152));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+.author{
+  font-family: 'Roboto Slab', serif;
+  font-size: 18px;
+  background: -webkit-linear-gradient(#F5F5F5, #D6D6D6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+/* .yourPost{
+  font-family: 'Roboto Slab', serif;
+  font-size: 10px;
+} */
 
 .bg-front{
   /* height: 100vh; */
