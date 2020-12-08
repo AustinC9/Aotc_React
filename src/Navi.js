@@ -1,18 +1,15 @@
 import React from "react";
 import axios from "axios";
 import AppContext from "./AppContext";
+import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import {
   Collapse,
   Navbar,
   NavbarToggler,
   NavbarBrand,
+  NavbarText,
   Nav,
   NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
   Button,
   Modal,
   ModalHeader,
@@ -27,17 +24,14 @@ import {
   Container,
 } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faReddit } from "@fortawesome/free-brands-svg-icons";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import "./App.css";
 
-function Navi({
-}) {
+function Navi() {
   const context = useContext(AppContext);
   const toggle2 = () => context.setModal(!context.modal);
   const toggle3 = () => context.setModal2(!context.modal2);
   const toggle = () => context.setIsOpen(!context.isOpen);
-
 
   const clickHandler = () => {
     const url = "http://localhost:8000/register";
@@ -46,8 +40,16 @@ function Navi({
       "Content-Type": "application/json;charset=UTF-8",
       "Access-Control-Allow-Origin": "*",
     };
-    const body = { name: context.userName, email: context.userEmail, password: context.userPassword };
-    const data = { name: context.userName, email: context.userEmail, password: context.userPassword };
+    const body = {
+      name: context.userName,
+      email: context.userEmail,
+      password: context.userPassword,
+    };
+    const data = {
+      name: context.userName,
+      email: context.userEmail,
+      password: context.userPassword,
+    };
     axios({
       url,
       method,
@@ -55,7 +57,11 @@ function Navi({
       body,
       data,
     })
-      .then((res) => console.log(res))
+      .then((res) => {
+        context.setBearer(res.data.data.token)
+          window.localStorage.setItem('token', res.data.data.token)
+        console.log(res)
+      })
       .catch((err) => console.log("error: ", err));
   };
   const clickHandler2 = () => {
@@ -69,7 +75,7 @@ function Navi({
     const data = {
       grant_type: "password",
       client_id: 2,
-      client_secret: "VYmXFly1MteogwguvwdLf0BwEo2vMBmlI22r9rLF",
+      client_secret: "AJGPwNY3J3wF14gHJjjEjJvXIy8FnFnuvAoHxa95",
       password: context.loginPassword,
       username: context.loginEmail,
       scope: "",
@@ -81,29 +87,14 @@ function Navi({
       data,
     })
       .then(
-        (res) =>
-        context.setBearer((prevBearer) => (prevBearer = res.data.access_token)),
-        console.log(data)
+        (res) =>{
+          context.setBearer(res.data.access_token)
+          window.localStorage.setItem('token', res.data.access_token)
+}
       )
       .catch((err) => console.log("error: ", err));
     console.log(context.bearer);
   };
-  useEffect(() => {
-    {
-      context.bearer &&
-        axios({
-          url: "http://localhost:8000/api/user",
-          method: "get",
-          headers: {
-            Accept: "application/json",
-            Authorization: `Bearer ${context.bearer}`,
-          },
-        })
-          .then(() => context.setLogin(true), console.log(context.login))
-          .catch((err) => console.log("error: ", err));
-    }
-    console.log(context.bearer);
-  }, [context.bearer]);
 
   // .catch(err => console.log('error: ', err))
   return (
@@ -112,35 +103,35 @@ function Navi({
         href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap"
         rel="stylesheet"
       ></link>
-      <Navbar color="white" light expand="md">
-        <NavbarBrand href="/">
-          <FontAwesomeIcon icon={faReddit} color="red" size="2x" spin />
-          reddit
+      <Navbar style={{backgroundColor:"#B9B7A7"}} light expand="md">
+        <NavbarBrand href="/" className="pr-5">
+          <FontAwesomeIcon icon={faThumbsUp} color="#7C90A0" size="2x" spin className="mr-3" />{" "}
+          <NavbarText color="white" className="pr-5 h2">LIKER</NavbarText>
         </NavbarBrand>
         <Container className="d-flex justify-content-end">
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={context.isOpen} navbar>
-          <div className="navi">
-            <Nav pills>
-              {/* <NavItem>
+            <div className="navi">
+              <Nav pills>
+                {/* <NavItem>
                 <NavLink href="/components/">Components</NavLink>
               </NavItem> */}
-              {/* <NavItem>
+                {/* <NavItem>
               <NavLink href="https://github.com/reactstrap/reactstrap">
                 GitHub
               </NavLink>
             </NavItem> */}
 
-              <NavItem onClick={toggle2} className="login">
-                <Button outline color="primary">
-                  Login
-                </Button>
-              </NavItem>
+                <NavItem onClick={toggle2} className="login">
+                  <Button outline>
+                    Login
+                  </Button>
+                </NavItem>
 
-              <NavItem onClick={toggle3}>
-                <Button color="primary">Sign Up</Button>
-              </NavItem>
-              {/* <Col className="align-self-end">
+                <NavItem onClick={toggle3}>
+                  <Button style={{backgroundColor:"#747274"}}>Sign Up</Button>
+                </NavItem>
+                {/* <Col className="align-self-end">
                 <UncontrolledDropdown nav inNavbar>
                   <DropdownToggle nav caret>
                     Options
@@ -153,7 +144,7 @@ function Navi({
                   </DropdownMenu>
                 </UncontrolledDropdown>
               </Col> */}
-            </Nav>
+              </Nav>
             </div>
           </Collapse>
         </Container>

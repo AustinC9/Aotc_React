@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navi from "./Navi";
 import Post from "./Post";
 import LoggedIn from "./LoggedIn";
 import UserDashBoard from "./UserDashBoard";
 import { AppProvider } from "./AppContext";
 import { Container } from "reactstrap";
+import axios from "axios";
 import "./App.css";
 
 //import { fa-reddit } from '@fortawesome/free-brands-svg-icons';
@@ -26,6 +27,7 @@ function App() {
   const [postBody, setPostBody] = useState("");
   const [modal5, setModal5] = useState(false);
   const [userPosts, setUserPosts] = useState();
+  const [user, setUser] = useState({});
   // const [history, useHistory] = useHistory();
 
   const initialContext = {
@@ -60,37 +62,55 @@ function App() {
     setModal5,
     userPosts,
     setUserPosts,
+    user,
+    setUser,
   };
+  useEffect(() => {
+    const lstoken = window.localStorage.getItem("token");
+    if (lstoken) {
+      setBearer(lstoken);
+    }
+  }, []);
+  useEffect(() => {
+    {
+      if (bearer !== "") {
+        axios({
+          url: "http://localhost:8000/api/user",
+          method: "get",
+          headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${bearer}`,
+          },
+        })
+          .then((res) => {
+            setLogin(true);
+            setUser(res.data);
+            console.log(login);
+          })
+          .catch((err) => console.log("error: ", err));
+      }
+    }
+  }, [bearer]);
 
-  if (login !== false) {
-    return (
-      <AppProvider value={initialContext}>
-        <div>
-          <LoggedIn />
-          <UserDashBoard />
-        </div>
-      </AppProvider>
-    );
-  } else {
-    return (
-      <AppProvider value={initialContext}>
-        <div className="bg-secondary">
-          <link rel="preconnect" href="https://fonts.gstatic.com" />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
-            rel="stylesheet"
-          />
-
-          <Navi
-          className="navi"
-          />
-          <Container className="bg-dark postContainer">
-            <Post posts={posts} setPosts={setPosts} />
-          </Container>
-        </div>
-      </AppProvider>
-    );
-  }
+  return (
+    <AppProvider value={initialContext}>
+      <div className="bg-front" style={{backgroundColor:'#4E5166'}}>
+        {!login ? (
+          <>
+            <Navi className="navi" />
+          </>
+        ) : (
+          <>
+            <LoggedIn />
+            <UserDashBoard />
+          </>
+        )}
+        <Container className="postContainer" style={{backgroundColor:'#B5AA9D'}}>
+          <Post posts={posts} setPosts={setPosts} />
+        </Container>
+      </div>
+    </AppProvider>
+  );
 }
 
 export default App;

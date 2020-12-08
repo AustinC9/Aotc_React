@@ -68,7 +68,10 @@ function LoggedIn({}) {
       method,
       headers,
     })
-      .then((res) => context.setUserPosts(prevPost => prevPost =res.data), console.log("YURTTTTTT"))
+      .then(
+        (res) => context.setUserPosts((prevPost) => (prevPost = res.data)),
+        console.log("YURTTTTTT")
+      )
       .catch((err) => console.log("error: ", err))
       .then();
   }
@@ -85,7 +88,11 @@ function LoggedIn({}) {
       method,
       headers,
     })
-      .then(() => context.setLogin(false))
+      .then(() => {
+        context.setBearer("");
+        window.localStorage.removeItem("token");
+        context.setLogin(false);
+      })
       .catch((err) => console.log("error: ", err));
   };
 
@@ -129,7 +136,9 @@ function LoggedIn({}) {
                               name="title"
                               id="title"
                               placeholder="Title"
-                              onChange={(e) => context.setPostTitle(e.target.value)}
+                              onChange={(e) =>
+                                context.setPostTitle(e.target.value)
+                              }
                             />
                           </FormGroup>
                           <FormGroup>
@@ -139,7 +148,9 @@ function LoggedIn({}) {
                               name="body"
                               id="body"
                               placeholder="Body"
-                              onChange={(e) => context.setPostBody(e.target.value)}
+                              onChange={(e) =>
+                                context.setPostBody(e.target.value)
+                              }
                             />
                           </FormGroup>
                         </Col>
