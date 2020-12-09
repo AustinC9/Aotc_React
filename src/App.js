@@ -77,7 +77,7 @@ function App() {
     {
       if (bearer !== "") {
         axios({
-          url: `${context.heroku}/api/user`,
+          url: `${heroku}/api/user`,
           method: "get",
           headers: {
             Accept: "application/json",
