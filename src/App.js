@@ -28,7 +28,9 @@ function App() {
   const [modal5, setModal5] = useState(false);
   const [userPosts, setUserPosts] = useState();
   const [user, setUser] = useState({});
-  const [heroku] = 'https://cors-anywhere.herokuapp.com/https://liker-project.herokuapp.com'
+  const [heroku] = 'https://cors-anywhere.herokuapp.com/https://liker-project.herokuapp.com';
+  const [modal6, setModal6] = useState(false);
+  const [editPost, setEditPost] = useState(0)
   // const [history, useHistory] = useHistory();
 
   const initialContext = {
@@ -65,7 +67,11 @@ function App() {
     setUserPosts,
     user,
     setUser,
-    heroku
+    heroku,
+    modal6, 
+    setModal6,
+    editPost,
+    setEditPost
   };
   useEffect(() => {
     const lstoken = window.localStorage.getItem("token");
@@ -87,7 +93,7 @@ function App() {
           .then((res) => {
             setLogin(true);
             setUser(res.data);
-            console.log(login);
+            // console.log(login);
           })
           .catch((err) => console.log("error: ", err));
       }
