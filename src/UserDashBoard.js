@@ -15,7 +15,7 @@ function UserDashBoard({}) {
   // const history = useHistory();
   const context = useContext(AppContext);
   useEffect(() => {
-    const url = "http://localhost:8000/userposts";
+    const url = `${context.heroku}/userposts`;
     const method = "get";
     const headers = {
       "Content-Type": "application/json",

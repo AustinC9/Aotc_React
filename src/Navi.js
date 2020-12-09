@@ -34,7 +34,7 @@ function Navi() {
   const toggle = () => context.setIsOpen(!context.isOpen);
 
   const clickHandler = () => {
-    const url = "http://localhost:8000/register";
+    const url = `${context.heroku}/register`;
     const method = "post";
     const headers = {
       "Content-Type": "application/json;charset=UTF-8",
@@ -65,7 +65,7 @@ function Navi() {
       .catch((err) => console.log("error: ", err));
   };
   const clickHandler2 = () => {
-    const url = "http://localhost:8000/v1/oauth/token";
+    const url = `${context.heroku}/v1/oauth/token`;
     const method = "post";
     const headers = {
       "Content-Type": "application/json; charset=utf-8",

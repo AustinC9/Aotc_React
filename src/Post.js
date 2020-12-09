@@ -18,7 +18,7 @@ import { faThumbsUp, faThumbsDown } from "@fortawesome/free-solid-svg-icons";
 function Post() {
   const context = useContext(AppContext);
   useEffect(() => {
-    const url = `http://localhost:8000/posts`;
+    const url = `${context.heroku}/posts`;
     const method = "get";
     axios({
       url,
@@ -43,7 +43,7 @@ function Post() {
   };
   const createLike = (post_id) => {
     console.log("liked", post_id);
-    const url = "http://localhost:8000/createlike";
+    const url = `${context.heroku}/createlike`;
     const method = "post";
     const data = { post_id };
     axios({
@@ -60,7 +60,7 @@ function Post() {
   };
   const deletelike = (post_id) => {
     console.log("delete like", post_id);
-    const url = "http://localhost:8000/deletelike";
+    const url = `${context.heroku}/deletelike`;
     const method = "post";
     const data = { post_id };
     axios({
@@ -90,7 +90,7 @@ function Post() {
   };
   const createDislike = (post_id) => {
     console.log("created dislike", post_id);
-    const url = "http://localhost:8000/createDislike";
+    const url = `${context.heroku}/createDislike`;
     const method = "post";
     const data = { post_id };
     axios({
@@ -107,7 +107,7 @@ function Post() {
   };
   const deleteDislike = (post_id) => {
     console.log("delete dislike", post_id);
-    const url = "http://localhost:8000/deleteDislike";
+    const url = `${context.heroku}/deleteDislike`;
     const method = "post";
     const data = { post_id };
     axios({

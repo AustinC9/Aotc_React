@@ -37,7 +37,7 @@ function LoggedIn({}) {
   const toggle5 = () => context.setModal5(!context.modal5);
 
   const clickHandler = () => {
-    const url = "http://localhost:8000/newpost";
+    const url = `${context.heroku}/newpost`;
     const method = "post";
     const headers = {
       "Content-Type": "application/json",
@@ -57,7 +57,7 @@ function LoggedIn({}) {
       .catch((err) => console.log("error: ", err));
   };
   function updatePosts() {
-    const url = "http://localhost:8000/userposts";
+    const url = `${context.heroku}/userposts`;
     const method = "get";
     const headers = {
       "Content-Type": "application/json",
@@ -77,7 +77,7 @@ function LoggedIn({}) {
       .then();
   }
   const logout = () => {
-    const url = "http://localhost:8000/logout";
+    const url = `${context.heroku}/logout`;
     const method = "get";
     const headers = {
       "Content-Type": "application/json",
