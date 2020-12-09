@@ -119,12 +119,15 @@ function Post() {
         Authorization: `Bearer ${context.bearer}`,
       },
     })
-      .then((res) => context.setPosts(res.data))
+      .then((res) => {context.setPosts(res.data)
+      })
       .catch((err) => console.log("error: ", err));
   };
 
-  return context.posts
-    ? context.posts.map((post, idx) => {
+  return (
+    <>
+    {context.posts > 0 ?
+       context.posts.map((post, idx) => {
         const likes = post.likes.filter((p) => p.liked == 1);
         const dislikes = post.likes.filter((p) => p.liked == 0);
         return (
@@ -162,8 +165,11 @@ function Post() {
           </>
         );
       })
-    : "";
-}
+      : ""
+    })
+        </>
+  
+  )}
 
 export default Post;
 {
